@@ -88,6 +88,7 @@ exports.update = (req, res) => {
 
 // Delete a Image with the specified id in the request
 exports.delete = (req, res) => {
+  console.log(req.params.id);
   const id = req.params.id;
 
   Image.destroy({

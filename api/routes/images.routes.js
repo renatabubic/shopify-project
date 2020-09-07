@@ -20,7 +20,7 @@ module.exports = (app) => {
   router.delete("/:id", images.delete);
 
   // Create a new Tutorial
-  router.delete("/", images.deleteAll);
+  // router.delete("/", images.deleteAll);
 
   app.use("/api/images", router);
 };

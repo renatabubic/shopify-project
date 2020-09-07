@@ -9,7 +9,7 @@ module.exports = (sequelize, Sequelize) => {
     price: {
       type: Sequelize.INTEGER,
     },
-    image: {
+    urlImage: {
       type: Sequelize.TEXT,
       defaultValue:
         "https://meylah.com/uploads/5626/images/copy6-1337034800-b-day-party-olive-martini.png?1545585529",
