@@ -32,10 +32,7 @@ exports.create = (req, res) => {
 
 // Retrieve all Images from the database.
 exports.findAll = (req, res) => {
-  const title = req.query.title;
-  var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
-
-  Image.findAll({ where: condition })
+  Image.findAll()
     .then((data) => {
       res.send(data);
     })
@@ -48,6 +45,7 @@ exports.findAll = (req, res) => {
 
 // Find a single Image with an id
 exports.findOne = (req, res) => {
+  console.log("params", req.params);
   const id = req.params.id;
 
   Image.findByPk(id)

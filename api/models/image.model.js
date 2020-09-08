@@ -3,9 +3,7 @@ module.exports = (sequelize, Sequelize) => {
     title: {
       type: Sequelize.STRING,
     },
-    tag: {
-      type: Sequelize.ARRAY(Sequelize.TEXT),
-    },
+
     price: {
       type: Sequelize.INTEGER,
     },
