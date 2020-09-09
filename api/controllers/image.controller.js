@@ -1,7 +1,5 @@
 const db = require("../models");
-// const imageModel = require("../models/image.model");
 const Image = db.images;
-// const Tag = db.tags;
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 
@@ -32,25 +30,25 @@ exports.create = async (req, res) => {
 };
 
 // Retrieve all Images from the database.
-exports.findAll = (req, res) => {
-  Image.findAll({ where: { public: true } })
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while retrieving images.",
-      });
-    });
+exports.findAll = async (req, res) => {
+  try {
+    const images = await Image.findAll();
+    if (images) {
+      res.json(images);
+    } else {
+      res.send("Problem finding images");
+    }
+  } catch (err) {
+    res.status(500).send("Some error occurred while retrieving images.");
+  }
 };
 
 //Retrive by image tag
 exports.findByTag = async (req, res) => {
   try {
     const tag = req.query.Tag;
-    console.log(tag);
     const images = await Image.findAll({
-      where: { tag: { [Op.contains]: [tag] } },
+      where: { tags: { [Op.contains]: [tag] } },
     });
     if (images) {
       res.json(images);
@@ -59,9 +57,9 @@ exports.findByTag = async (req, res) => {
     }
   } catch (error) {
     res
-      .sendStatus(500)
+      .status(500)
       .send(
-        "Something went wrong when attempting to retrieve images by tagName"
+        "Something went wrong when attempting to retrieve images by tag name"
       );
   }
 };
@@ -177,20 +175,3 @@ exports.deleteAll = (req, res) => {
       });
     });
 };
-
-// exports.findSome = async (req, res) => {
-//   try {
-//     const tag = req.query.Tag;
-
-//     const images = await Image.findAll({
-//       include: [{ model: Tag, where: { name: tag } }],
-//     });
-//     if (images) {
-//       res.json(images);
-//     } else {
-//       res.sendStatus(404).send("Unable to retrieve images with:" + tag);
-//     }
-//   } catch (error) {
-//     res.send(error);
-//   }
-// };

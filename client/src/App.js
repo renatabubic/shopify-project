@@ -18,7 +18,6 @@ class App extends Component {
     this.getData("");
   }
   async getData(param) {
-    console.log(param);
     const { data } = await axios.get(apiUrl + param);
     this.setState({ images: data });
   }
@@ -28,9 +27,12 @@ class App extends Component {
     else this.setState({ toSearch: e.target.value });
   }
   handleSubmit() {
-    const queryType = this.state.searchBy === "title" ? "title" : "tag";
-    const query = `/searchBy?${queryType}=${this.state.toSearch}`;
-    this.getData(query);
+    if (this.state.searchBy === "all") this.getData("");
+    else {
+      const queryType = this.state.searchBy === "title" ? "Title" : "Tag";
+      const query = `/searchBy${queryType}?${queryType}=${this.state.toSearch}`;
+      this.getData(query);
+    }
   }
 
   render() {
@@ -46,12 +48,14 @@ class App extends Component {
               <option value="title">title</option>
               <option value="tag">tag</option>
             </select>
-            <Nav
-              className="nav-bar"
-              handleChange={this.handleChange}
-              handleSubmit={this.handleSubmit}
-              searchBy={this.state.searchBy}
+            <input
+              type="text"
+              placeholder={`type here`}
+              onChange={this.handleChange}
             />
+            <button type="submit" value="Submit" onClick={this.handleSubmit}>
+              submit
+            </button>
           </label>
         </div>
         <ul id="images">

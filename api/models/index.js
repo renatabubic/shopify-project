@@ -22,8 +22,8 @@ db.sequelize = sequelize;
 db.images = require("./image.model.js")(sequelize, Sequelize);
 db.users = require("./user.model")(sequelize, Sequelize);
 
-db.users.hasMany(db.images);
-db.images.belongsTo(db.users);
+// db.users.hasMany(db.images);
+// db.images.belongsTo(db.users);
 
 // db.images.belongsToMany(db.images, {
 //   as: "similar_img",

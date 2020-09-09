@@ -10,7 +10,7 @@ const images = [
     tags: ["fall", "forest", "tree", "nature"],
     urlImage:
       "https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072823__340.jpg",
-    userId: 1,
+    // userId: 1,
   },
   {
     title: "fall nature walk",
@@ -18,7 +18,7 @@ const images = [
     tags: ["fall", "forest", "tree", "nature"],
     urlImage:
       "https://cdn.pixabay.com/photo/2015/12/01/20/28/fall-1072821__340.jpg",
-    userId: 1,
+    // userId: 1,
   },
   {
     title: "tree in field",
@@ -26,7 +26,7 @@ const images = [
     tags: ["summer", "field", "tree", "green", "nature"],
     urlImage:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTc-bQTiwSWkFegmAib4r-5-KTQoHOmfZdIcg&usqp=CAU",
-    userId: 2,
+    // userId: 2,
   },
   {
     title: "mountain lake",
@@ -34,7 +34,7 @@ const images = [
     tags: ["water", "mountain", "lake", "tree", "nature"],
     urlImage:
       "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/nature-quotes-1557340276.jpg?crop=0.666xw:1.00xh;0.168xw,0&resize=640:*",
-    userId: 2,
+    // userId: 2,
   },
   {
     title: "bridge Lake",
@@ -42,7 +42,7 @@ const images = [
     tags: ["bridge", "water", "lake", "tree", "forest", "nature"],
     urlImage:
       "https://d1whtlypfis84e.cloudfront.net/guides/wp-content/uploads/2019/07/23090714/nature-1024x682.jpeg",
-    userId: 3,
+    // userId: 3,
   },
   {
     title: "coloful desert flowers",
@@ -50,7 +50,7 @@ const images = [
     tags: ["desert", "flowers", "color", "water"],
     urlImage:
       "https://inspiration.rehlat.com/wp-content/uploads/2019/01/Colorful-Nature.jpg",
-    userId: 3,
+    // userId: 3,
   },
   {
     title: "new york city",
@@ -58,7 +58,7 @@ const images = [
     tags: ["nyc", "city", "skyline"],
     urlImage:
       "https://static.toiimg.com/thumb/msid-38487526,width-748,height-499,resizemode=4,imgsize-248462/.jpg",
-    userId: 1,
+    // userId: 1,
   },
   {
     title: "new york city at night",
@@ -66,7 +66,7 @@ const images = [
     price: 50,
     urlImage:
       "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRK4hr1xjqqVYh5RGDCRQIArUHgeVWGjAnfzw&usqp=CAU",
-    userId: 1,
+    // userId: 1,
   },
   {
     title: "shanghai",
@@ -74,7 +74,7 @@ const images = [
     tags: ["shanghai", "city", "skyline", "water"],
     urlImage:
       "https://i2.wp.com/theluxurytravelexpert.com/wp-content/uploads/2018/08/SHANGHAI-CHINA.jpg?fit=970%2C546&ssl=1",
-    userId: 2,
+    // userId: 2,
   },
   {
     title: "singapore skyline",
@@ -82,7 +82,7 @@ const images = [
     tags: ["shanghai", "city", "skyline", "water"],
     urlImage:
       "https://i0.wp.com/theluxurytravelexpert.com/wp-content/uploads/2018/08/SINGAPORE.jpg?ssl=1",
-    userId: 2,
+    // userId: 2,
   },
   {
     title: "vancouver skyline",
@@ -90,7 +90,7 @@ const images = [
     tags: ["water", "city", "water", "skyline"],
     urlImage:
       "https://i2.wp.com/theluxurytravelexpert.com/wp-content/uploads/2018/08/VANCOUVER-CANADA.jpg?w=970&ssl=1",
-    userId: 3,
+    // userId: 3,
   },
 ];
 
@@ -112,11 +112,11 @@ const users = [
 const seed = async () => {
   try {
     await db.sequelize.sync({ force: true });
-    await Promise.all(
-      users.map((user) => {
-        return User.create(user);
-      })
-    );
+    // await Promise.all(
+    //   users.map((user) => {
+    //     return User.create(user);
+    //   })
+    // );
     await Promise.all(
       images.map((image) => {
         return Image.create(image);
