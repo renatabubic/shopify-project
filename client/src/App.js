@@ -6,8 +6,8 @@ import ImageTile from "./image.tile";
 const apiUrl = "http://localhost:8080/api/images/";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = { images: [], toSearch: "", searchBy: "all" };
     this.getData = this.getData.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -56,6 +56,21 @@ class App extends Component {
               submit
             </button>
           </label>
+        </div>
+        <div className="add-delete-buttons">
+          <button>Add images</button>
+          <button
+            onClick={async () => {
+              const deleted = await axios.delete(apiUrl);
+              if (!deleted) {
+                alert("Please select images to delete");
+              } else {
+                this.getData("");
+              }
+            }}
+          >
+            Delete image(s)
+          </button>
         </div>
         <ul id="images">
           {this.state.images.length > 0 ? (
