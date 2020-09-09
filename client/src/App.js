@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 import ImageTile from "./image.tile";
-import Nav from "./nav";
 
 const apiUrl = "http://localhost:8080/api/images/";
 
