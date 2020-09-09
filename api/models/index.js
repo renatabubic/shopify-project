@@ -20,10 +20,14 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.images = require("./image.model.js")(sequelize, Sequelize);
-db.tags = require("./tag.model.js")(sequelize, Sequelize);
-Image_Tag = require("./image_tag.model")(sequelize, Sequelize);
+db.users = require("./user.model")(sequelize, Sequelize);
 
-db.tags.belongsToMany(db.images, { through: "Image_Tag" });
-db.images.belongsToMany(db.tags, { through: "Image_Tag" });
+db.users.hasMany(db.images);
+db.images.belongsTo(db.users);
+
+// db.images.belongsToMany(db.images, {
+//   as: "similar_img",
+//   through: "similar_images",
+// });
 
 module.exports = db;

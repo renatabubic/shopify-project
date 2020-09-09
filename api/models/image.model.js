@@ -2,19 +2,40 @@ module.exports = (sequelize, Sequelize) => {
   const Image = sequelize.define("image", {
     title: {
       type: Sequelize.STRING,
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
-
+    tags: {
+      type: Sequelize.ARRAY(Sequelize.STRING),
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
+    },
     price: {
-      type: Sequelize.INTEGER,
+      type: Sequelize.Sequelize.DECIMAL(16, 2),
+      defaultValue: 50,
     },
     urlImage: {
       type: Sequelize.TEXT,
-      defaultValue:
-        "https://meylah.com/uploads/5626/images/copy6-1337034800-b-day-party-olive-martini.png?1545585529",
+      allowNull: false,
+      validate: {
+        notEmpty: true,
+      },
     },
     quantity: {
       type: Sequelize.INTEGER,
       defaultValue: 10,
+    },
+    selected: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: false,
+    },
+    public: {
+      type: Sequelize.BOOLEAN,
+      defaultValue: true,
     },
   });
 
