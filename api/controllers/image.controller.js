@@ -9,6 +9,7 @@ exports.create = async (req, res) => {
     const resp = req.body;
     //check if there is multiple images to create
     if (Array.isArray(resp)) {
+      console.log(resp);
       const images = await Image.bulkCreate(resp, { returning: true });
       if (images) {
         res.json(images);
@@ -68,7 +69,6 @@ exports.findByTag = async (req, res) => {
 exports.findByTitle = async (req, res) => {
   try {
     const title = req.query.Title;
-    console.log(title);
     const image = await Image.findAll({
       where: { title: { [Op.like]: `%${title}%` } },
     });
@@ -83,75 +83,70 @@ exports.findByTitle = async (req, res) => {
 };
 
 // Find a single Image with an id
-exports.findOne = (req, res) => {
-  const id = req.params.id;
+exports.findOne = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const image = await Image.findByPk(id);
 
-  Image.findByPk(id)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error retrieving Image with id=" + id,
-      });
-    });
+    if (image) {
+      res.json(image);
+    } else {
+      res.send("Unable to find image with id: " + id);
+    }
+  } catch (error) {
+    res.send(500).send("Error retrieving Image");
+  }
 };
 
 // Update a Image by the id in the request
-exports.update = (req, res) => {
-  const id = req.params.id;
-
-  Image.update(req.body, {
-    where: { id: id },
-  })
-    .then((num) => {
-      if (num == 1) {
-        res.send({
-          message: "Image was updated successfully.",
-        });
-      } else {
-        res.send({
-          message: `Cannot update Image with id=${id}. Maybe Image was not found or req.body is empty!`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Error updating Image with id=" + id,
-      });
+exports.update = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const image = await Image.update(req.body, {
+      where: { id: id },
     });
+    if (image) {
+      res.send("image was updated successfully");
+    } else {
+      res.send(
+        `Cannot update Image with id=${id}. Maybe Image was not found or req.body is empty!`
+      );
+    }
+  } catch (error) {
+    res.send(500).send("Error updating Image with id=" + id);
+  }
 };
 
 // Delete a Image with the specified id in the request
-exports.delete = (req, res) => {
-  const id = req.params.id;
-
-  Image.destroy({
-    where: { id: id },
-  })
-    .then((num) => {
-      if (num == 1) {
-        res.send({
-          message: "Image was deleted successfully!",
-        });
-      } else {
-        res.send({
-          message: `Cannot delete Image with id=${id}. Maybe Image was not found!`,
-        });
-      }
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message: "Could not delete Image with id=" + id,
-      });
+exports.delete = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const num = await Image.destroy({
+      where: { id: id },
     });
+    if (num == 1) {
+      res.send({
+        message: "Image was deleted successfully!",
+      });
+    } else {
+      res.send({
+        message: `Cannot delete Image with id=${id}. Maybe Image was not found!`,
+      });
+    }
+  } catch (err) {
+    res.status(500).send({
+      message: "Could not delete Image with id=" + id,
+    });
+  }
 };
 
+//Delete multiple Images
 exports.deleteSelected = async (req, res) => {
   try {
-    await Image.destroy({ where: { selected: true } });
-    const images = await Image.findAll();
-    res.json(images);
+    const nums = await Image.destroy({ where: { selected: true } });
+    if (nums) {
+      res.send({ message: `${nums} Images were deleted successfully!` });
+    }
   } catch (error) {
     res
       .status(500)
@@ -159,19 +154,4 @@ exports.deleteSelected = async (req, res) => {
   }
 };
 
-// Delete all Images from the database.
-exports.deleteAll = (req, res) => {
-  Image.destroy({
-    where: {},
-    truncate: false,
-  })
-    .then((nums) => {
-      res.send({ message: `${nums} Images were deleted successfully!` });
-    })
-    .catch((err) => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while removing all images.",
-      });
-    });
-};
+//removed delete all images... must select 'all' to delete all from db

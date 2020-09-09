@@ -29,7 +29,7 @@ module.exports = (app) => {
   router.delete("/", images.deleteSelected);
 
   // Delete all Images with id
-  router.delete("/deleteAll", images.deleteAll);
+  // router.delete("/deleteAll", images.deleteAll);
 
   app.use("/api/images", router);
 };
