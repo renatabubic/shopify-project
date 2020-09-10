@@ -47,3 +47,6 @@ Navigate to the `client` directory
 
 With both apps running, open browser to http://localhost:3000/
 You should be able to see images!
+
+### Need to re-seed the database?
+Run ```npm run seed``` in the cli
