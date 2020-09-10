@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import apiUrl from "./secrets";
 import Popup from "reactjs-popup";
@@ -14,27 +14,30 @@ class MultipleFileInput extends Component {
       tags: [],
       beginUpload: false,
       hasUploaded: false,
+      progress: 0,
+      setProgess: 0,
     };
     this.onChangeHandler = this.onChangeHandler.bind(this);
     this.onClickHandler = this.onClickHandler.bind(this);
   }
 
   onChangeHandler(event) {
-    const files = event.target.files;
-    this.setState({
-      selectedFile: files,
-    });
+    this.state.selectedFile = event.target.files;
+    this.setState({ beginUpload: true });
   }
   async onClickHandler() {
     try {
-      const title = this.state.title;
-      const tags = this.state.tags;
-      const urlImage = this.state.selectedFile[0].name;
-
-      const images = await axios.post(apiUrl, { title, tags, urlImage });
+      let data = new FormData();
+      // if there are multiple files
+      for (let i = 0; i < this.state.selectedFile.length; i++) {
+        data.append("file", this.state.selectedFile[i]);
+        data.append("title", this.state.title);
+        data.append("tags", this.state.tags);
+      }
+      const images = await axios.post(apiUrl, data);
       if (images) {
         toast.success("upload success");
-        this.setState({ hasUploaded: true });
+        // this.setState({ hasUploaded: true });
       }
     } catch (err) {
       toast.error("upload fail");
@@ -67,25 +70,33 @@ class MultipleFileInput extends Component {
                       {" "}
                       Complete form for a successful upload{" "}
                     </div>
-                    <div className="content">
-                      <input
-                        type="text"
-                        placeholder="title"
-                        required={true}
-                        onChange={(e) =>
-                          this.setState({ title: e.target.value })
-                        }
-                      />
-                      <input
-                        type="text"
-                        placeholder="tags"
-                        required={true}
-                        onChange={(e) =>
-                          this.setState({
-                            tags: [e.target.value],
-                          })
-                        }
-                      />
+                    <div>
+                      <label className="content-container">
+                        <div className="content">
+                          <input
+                            type="text"
+                            placeholder="title"
+                            required={true}
+                            onChange={(e) =>
+                              this.setState({ title: e.target.value })
+                            }
+                          />
+                          <input
+                            type="text"
+                            placeholder="tags"
+                            required={true}
+                            onChange={(e) => {
+                              this.setState({
+                                tags: e.target.value,
+                              });
+                            }}
+                          />
+                        </div>
+                        separate tags by a comma, no spaces.
+                        <br />
+                        Ex: water,nature,blue
+                      </label>
+                      <ToastContainer />
                     </div>
                     <div>
                       <button

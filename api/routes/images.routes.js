@@ -1,11 +1,28 @@
 module.exports = (app) => {
   const images = require("../controllers/image.controller");
   const db = require("../models");
+  const multer = require("multer");
+  const path = require("path");
+
+  const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      cb(
+        null,
+        process.cwd().slice(0, process.cwd().length - 4) +
+          "/client/public/uploads"
+      );
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.originalname);
+    },
+  });
+  // create the multer instance that will be used to upload/save the file
+  const upload = multer({ storage });
 
   const router = require("express").Router();
 
   // Create a new Image(s)
-  router.post("/", images.create);
+  router.post("/", upload.array("file"), images.create);
 
   // Retrieve all Images
   router.get("/", images.findAll);

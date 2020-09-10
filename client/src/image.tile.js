@@ -35,7 +35,7 @@ class ImageTile extends React.Component {
         </div>
         <Link to={`/images/${image.id}`}>
           <img
-            src={image.urlImage}
+            src={process.env.PUBLIC_URL + "/uploads/" + image.urlImage}
             height={250}
             width={250}
             alt=""

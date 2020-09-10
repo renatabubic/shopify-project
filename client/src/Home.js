@@ -5,7 +5,7 @@ import ImageTile from "./image.tile";
 import Image from "./Image";
 import MultipleFileInput from "./MultipleFileInput";
 import apiUrl from "./secrets";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 
 class Home extends Component {
   constructor() {
@@ -76,6 +76,7 @@ class Home extends Component {
             >
               Delete image(s)
             </button>
+            <ToastContainer />
           </div>
         </div>
         <ul id="images">

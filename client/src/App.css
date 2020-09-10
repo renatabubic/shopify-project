@@ -94,4 +94,30 @@ img {
   background: rgb(255, 255, 255);
   width: 50%;
   padding: 5px;
+  border-radius: 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+}
+.content-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.modal {
+  margin: 10px;
+  justify-content: space-around;
+}
+
+button {
+  margin: 10px;
+}
+
+.header {
+  margin: 10px;
+}
+input {
+  margin: 5px;
 }

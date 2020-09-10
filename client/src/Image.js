@@ -60,7 +60,12 @@ class Image extends React.Component {
               <h1>Image Repository </h1>
               <p>Title: {image.title}</p>
             </div>
-            <img src={image.urlImage} height={500} width={500} alt=""></img>
+            <img
+              src={process.env.PUBLIC_URL + "/uploads/" + image.urlImage}
+              height={500}
+              width={500}
+              alt=""
+            ></img>
             <div>
               <p>${image.price}</p>
               <p>{image.quantity} available</p>
@@ -81,7 +86,14 @@ class Image extends React.Component {
                     to={`/images/${image.id}`}
                     onClick={this.waitForIdToChange}
                   >
-                    <img src={image.urlImage} height={200} width={200} alt="" />
+                    <img
+                      src={
+                        process.env.PUBLIC_URL + "/uploads/" + image.urlImage
+                      }
+                      height={200}
+                      width={200}
+                      alt=""
+                    />
                   </Link>
                 );
               })}

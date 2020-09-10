@@ -3,29 +3,44 @@ const Image = db.images;
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 const fs = require("fs");
+const { fileURLToPath } = require("url");
 
 // Create and Save a new Image
 exports.create = async (req, res) => {
   try {
     const resp = req.body;
+    console.log("RESPONSE BODY");
+    console.log(req.body);
+    console.log("RESPONSE FILES");
+    console.log(req.files);
     //check if there is multiple images to create
-    if (Array.isArray(resp)) {
-      const images = await Image.bulkCreate(resp, { returning: true });
+    if (Array(resp.title)) {
+      let toUpload = [];
+      for (let i = 0; i < resp.title.length; i++) {
+        toUpload[i] = {
+          title: resp.title[i],
+          tags: resp.tags[i].split(","),
+          urlImage: req.files[i].filename,
+        };
+      }
+      console.log("TOUPLOAD", toUpload);
+      const images = await Image.bulkCreate(toUpload, { returning: true });
       if (images) {
+        console.log("BULK LOAD COMPLETE");
         res.json(images);
       } else {
         res.send("Unable to upload images");
       }
       //One image to create
     } else {
-      //placeholder image... db is set up to house urls, not image blobs
-      if (resp.urlImage.slice(0, 3) !== "http") {
-        resp.urlImage =
-          process.cwd().slice(0, process.cwd().length - 4) +
-          "/client/src/static/placeholder-1-e1533569576673.png";
-      }
-      const image = await Image.create(resp);
+      const data = {
+        title: req.body.title,
+        tags: req.body.tags.split(","),
+        urlImage: req.file.filename,
+      };
+      const image = await Image.create(data);
       if (image) {
+        console.log("image upload successful");
         res.json(image);
       } else {
         res.status(500).send("Some error occurred while creating the image.");
