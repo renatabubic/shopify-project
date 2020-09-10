@@ -9,12 +9,9 @@ const { fileURLToPath } = require("url");
 exports.create = async (req, res) => {
   try {
     const resp = req.body;
-    console.log("RESPONSE BODY");
-    console.log(req.body);
-    console.log("RESPONSE FILES");
-    console.log(req.files);
+
     //check if there is multiple images to create
-    if (Array(resp.title)) {
+    if (Array.isArray(resp.title)) {
       let toUpload = [];
       for (let i = 0; i < resp.title.length; i++) {
         toUpload[i] = {
@@ -23,7 +20,6 @@ exports.create = async (req, res) => {
           urlImage: req.files[i].filename,
         };
       }
-      console.log("TOUPLOAD", toUpload);
       const images = await Image.bulkCreate(toUpload, { returning: true });
       if (images) {
         console.log("BULK LOAD COMPLETE");
@@ -36,7 +32,7 @@ exports.create = async (req, res) => {
       const data = {
         title: req.body.title,
         tags: req.body.tags.split(","),
-        urlImage: req.file.filename,
+        urlImage: req.files[0].filename,
       };
       const image = await Image.create(data);
       if (image) {
