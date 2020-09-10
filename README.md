@@ -9,15 +9,15 @@ Actually, there are two separate apps. The Client which serves the FrontEnd (usi
 Focusing on the server-side features of this project, this image repo web-app allows for the following functionality:
 
 SEARCH image by:
--keyword in title/name
--tag/characteristic
--similar images
+- keyword in title/name
+- tag/characteristic
+- similar images
 
 ADD image:
--single/bulk
+- single/bulk
 
 DELETE image:
--single/bulk
+- single/bulk
 
 With this, I also included a client-side so that the reader/user can see how it works fullstack.
 
