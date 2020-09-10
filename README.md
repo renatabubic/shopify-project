@@ -4,7 +4,7 @@ This project is for the Winter 2021 Intership Application (Backend Development) 
 
 ## About the app
 
-Actually, there are two separate apps. The Client which serves the FrontEnd (using React), and the API (in Node/Express/PostgreSQL).
+Actually, there are two separate apps. The Client which serves the frontend (using React), and the API (in Node/Express/PostgreSQL).
 
 Focusing on the server-side features of this project, this image repo web-app allows for the following functionality:
 
