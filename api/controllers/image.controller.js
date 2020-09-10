@@ -2,6 +2,7 @@ const db = require("../models");
 const Image = db.images;
 const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
+const fs = require("fs");
 
 // Create and Save a new Image
 exports.create = async (req, res) => {
@@ -9,7 +10,6 @@ exports.create = async (req, res) => {
     const resp = req.body;
     //check if there is multiple images to create
     if (Array.isArray(resp)) {
-      console.log(resp);
       const images = await Image.bulkCreate(resp, { returning: true });
       if (images) {
         res.json(images);
@@ -18,6 +18,12 @@ exports.create = async (req, res) => {
       }
       //One image to create
     } else {
+      //placeholder image... db is set up to house urls, not image blobs
+      if (resp.urlImage.slice(0, 3) !== "http") {
+        resp.urlImage =
+          process.cwd().slice(0, process.cwd().length - 4) +
+          "/client/src/static/placeholder-1-e1533569576673.png";
+      }
       const image = await Image.create(resp);
       if (image) {
         res.json(image);
@@ -144,8 +150,11 @@ exports.delete = async (req, res) => {
 exports.deleteSelected = async (req, res) => {
   try {
     const nums = await Image.destroy({ where: { selected: true } });
+    console.log(nums);
     if (nums) {
       res.send({ message: `${nums} Images were deleted successfully!` });
+    } else {
+      res.sendStatus(500);
     }
   } catch (error) {
     res

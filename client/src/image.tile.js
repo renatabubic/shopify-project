@@ -1,6 +1,8 @@
 import React from "react";
 import axios from "axios";
-const apiUrl = "http://localhost:8080/api/images/";
+import apiUrl from "./secrets";
+import { Link } from "react-router-dom";
+
 class ImageTile extends React.Component {
   constructor() {
     super();
@@ -21,7 +23,7 @@ class ImageTile extends React.Component {
     const image = this.props.image;
     return (
       <div className="image-tile">
-        <div className="image-header">
+        <div className="image-header-tile">
           <p>{image.title}</p>
           {this.state.selected ? (
             <img
@@ -31,11 +33,15 @@ class ImageTile extends React.Component {
             />
           ) : null}
         </div>
-        <img src={image.urlImage} height={250} width={250} alt=""></img>
-        <div className="image-ps">
-          <p>${image.price}</p>
-          <p>{image.quantity} available</p>
-        </div>
+        <Link to={`/images/${image.id}`}>
+          <img
+            src={image.urlImage}
+            height={250}
+            width={250}
+            alt=""
+            onClick={() => {}}
+          />
+        </Link>
         {!this.state.selected ? (
           <button
             onClick={async () => {

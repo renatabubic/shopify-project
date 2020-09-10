@@ -27,7 +27,7 @@ module.exports = (sequelize, Sequelize) => {
     },
     quantity: {
       type: Sequelize.INTEGER,
-      defaultValue: 10,
+      defaultValue: 1,
     },
     selected: {
       type: Sequelize.BOOLEAN,
