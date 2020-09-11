@@ -7,18 +7,11 @@ class ImageTile extends React.Component {
   constructor() {
     super();
     this.state = { selected: false };
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   componentDidMount() {
     this.setState({ selected: this.props.image.selected });
   }
-  handleSubmit(e) {
-    const image = this.props.image;
 
-    if (image.quantity > 1) {
-      return;
-    }
-  }
   render() {
     const image = this.props.image;
     return (

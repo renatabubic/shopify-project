@@ -13,7 +13,6 @@ class MultipleFileInput extends Component {
       title: "",
       tags: [],
       beginUpload: false,
-      hasUploaded: false,
       progress: 0,
       setProgess: 0,
     };
@@ -22,14 +21,13 @@ class MultipleFileInput extends Component {
   }
 
   onChangeHandler(event) {
-    // this.state.selectedFile = event.target.files;
     this.setState({ selectedFile: event.target.files, beginUpload: true });
     console.log(this.state.selectedFile);
   }
   async onClickHandler() {
     try {
       let data = new FormData();
-      // if there are multiple files
+      // if there are multiple files to upload
       for (let i = 0; i < this.state.selectedFile.length; i++) {
         data.append("file", this.state.selectedFile[i]);
         data.append("title", this.state.title);
@@ -38,7 +36,6 @@ class MultipleFileInput extends Component {
       const images = await axios.post(apiUrl, data);
       if (images) {
         toast.success("upload success");
-        // this.setState({ hasUploaded: true });
       }
     } catch (err) {
       toast.error("upload fail");

@@ -20,7 +20,6 @@ class Image extends React.Component {
   async getData() {
     const { id } = this.props.match.params;
     const res = await axios.get(apiUrl + "/" + id);
-    console.log(res);
     const image = res.data;
     let images = [];
     let ids = {};

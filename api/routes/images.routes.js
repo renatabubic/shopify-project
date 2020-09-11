@@ -32,7 +32,7 @@ module.exports = (app) => {
   //Retrieve by image title
   router.get("/searchByTitle", images.findByTitle);
 
-  // Retrieve a single Image with id
+  // Retrieve a single image with id
   router.get("/:id", images.findOne);
 
   // Update a Image with id

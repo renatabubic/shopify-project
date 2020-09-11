@@ -22,7 +22,6 @@ class Home extends Component {
     this.setState({ images: data });
   }
   handleChange(e) {
-    //this.setState() won't update state when e.target.value = tag?!?!
     if (e.target.type !== "text") this.setState({ searchBy: e.target.value });
     else this.setState({ toSearch: e.target.value });
   }
@@ -42,7 +41,6 @@ class Home extends Component {
         <div className="nav">
           <div>
             <label>
-              {" "}
               Search:
               <select type="select" onChange={this.handleChange}>
                 <option value="all">all</option>

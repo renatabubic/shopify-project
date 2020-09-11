@@ -8,7 +8,6 @@ const { fileURLToPath } = require("url");
 // Create and Save a new Image
 exports.create = async (req, res) => {
   try {
-    console.log(req.files);
     //check if there are multiple images to create
     if (Array.isArray(req.body.title)) {
       let toUpload = [];
@@ -100,18 +99,13 @@ exports.findByTitle = async (req, res) => {
   }
 };
 
-// Find a single Image with an id
+// Find a single image with an id
 exports.findOne = async (req, res) => {
   try {
     const id = req.params.id;
     const image = await Image.findByPk(id);
 
     if (image) {
-      // const blobimg = image.blob;
-      // let blob = await new Blob(JSON.stringify(blobimg), {
-      //   type: "text/plain",
-      // });
-      // console.log(blob);
       res.json(image);
     } else {
       res.send("Unable to find image with id: " + id);
@@ -140,7 +134,7 @@ exports.update = async (req, res) => {
   }
 };
 
-// Delete a Image with the specified id in the request
+// Delete an image with the specified id
 exports.delete = async (req, res) => {
   try {
     const id = req.params.id;
@@ -167,7 +161,6 @@ exports.delete = async (req, res) => {
 exports.deleteSelected = async (req, res) => {
   try {
     const nums = await Image.destroy({ where: { selected: true } });
-    console.log(nums);
     if (nums) {
       res.send({ message: `${nums} image(s) deleted` });
     } else {
@@ -180,4 +173,4 @@ exports.deleteSelected = async (req, res) => {
   }
 };
 
-//removed delete all images... must select 'all' to delete all from db
+//removed delete all images route... must select 'all' to delete all from db
