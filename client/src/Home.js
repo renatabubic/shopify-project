@@ -79,21 +79,9 @@ class Home extends Component {
           </div>
         </div>
         <ul id="images">
-          {this.state.images.length > 0 ? (
-            this.state.images.map((image) => {
-              return <ImageTile key={image.id} image={image} />;
-            })
-          ) : (
-            <div className="no-images">
-              <h4>Sorry, your search didn't yield any results</h4>
-              <img
-                src="https://hotemoji.com/images/dl/x/sad-emoji-by-twitter.png"
-                alt=""
-                height="250"
-                width="230"
-              ></img>
-            </div>
-          )}
+          {this.state.images.map((image) => {
+            return <ImageTile key={image.id} image={image} />;
+          })}
         </ul>
       </div>
     );
