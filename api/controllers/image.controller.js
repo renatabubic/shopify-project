@@ -17,6 +17,7 @@ exports.create = async (req, res) => {
           title: req.body.title[i],
           tags: req.body.tags[i].split(","),
           path: req.files[i].filename,
+          blob: req.files[0],
         };
       }
       const images = await Image.bulkCreate(toUpload, { returning: true });
@@ -31,7 +32,8 @@ exports.create = async (req, res) => {
       const data = {
         title: req.body.title,
         tags: req.body.tags.split(","),
-        path: req.files,
+        path: req.files[0].filename,
+        blob: req.files[0],
       };
       const image = await Image.create(data);
       if (image) {
@@ -105,6 +107,11 @@ exports.findOne = async (req, res) => {
     const image = await Image.findByPk(id);
 
     if (image) {
+      // const blobimg = image.blob;
+      // let blob = await new Blob(JSON.stringify(blobimg), {
+      //   type: "text/plain",
+      // });
+      // console.log(blob);
       res.json(image);
     } else {
       res.send("Unable to find image with id: " + id);
@@ -162,7 +169,7 @@ exports.deleteSelected = async (req, res) => {
     const nums = await Image.destroy({ where: { selected: true } });
     console.log(nums);
     if (nums) {
-      res.send({ message: `${nums} Images were deleted successfully!` });
+      res.send({ message: `${nums} image(s) deleted` });
     } else {
       res.sendStatus(500);
     }

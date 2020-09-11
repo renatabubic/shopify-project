@@ -22,8 +22,9 @@ class MultipleFileInput extends Component {
   }
 
   onChangeHandler(event) {
-    this.state.selectedFile = event.target.files;
-    this.setState({ beginUpload: true });
+    // this.state.selectedFile = event.target.files;
+    this.setState({ selectedFile: event.target.files, beginUpload: true });
+    console.log(this.state.selectedFile);
   }
   async onClickHandler() {
     try {

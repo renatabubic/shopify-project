@@ -4,10 +4,34 @@ const Image = db.images;
 
 const images = [
   {
+    title: "shanghai",
+    price: 265,
+    tags: ["shanghai", "city", "skyline", "water"],
+    path: "SHANGHAI-CHINA.jpg",
+  },
+  {
     title: "fall walk",
     price: 50,
     tags: ["fall", "forest", "tree", "nature"],
     path: "road-1072823__340.jpg",
+  },
+  {
+    title: "coloful desert flowers",
+    price: 50,
+    tags: ["desert", "flowers", "color", "water"],
+    path: "Colorful-Nature.jpg",
+  },
+  {
+    title: "new york city",
+    price: 500,
+    tags: ["nyc", "city", "skyline"],
+    path: "11-stunning-city-skylines-around-the-world.jpg",
+  },
+  {
+    title: "vancouver skyline",
+    price: 150,
+    tags: ["water", "city", "water", "skyline"],
+    path: "VANCOUVER-CANADA.jpg",
   },
   {
     title: "fall nature walk",
@@ -33,18 +57,7 @@ const images = [
     tags: ["bridge", "water", "lake", "tree", "forest", "nature"],
     path: "nature-1024x682.jpeg",
   },
-  {
-    title: "coloful desert flowers",
-    price: 50,
-    tags: ["desert", "flowers", "color", "water"],
-    path: "Colorful-Nature.jpg",
-  },
-  {
-    title: "new york city",
-    price: 500,
-    tags: ["nyc", "city", "skyline"],
-    path: "11-stunning-city-skylines-around-the-world.jpg",
-  },
+
   {
     title: "new york city at night",
     tags: ["nyc", "city", "skyline"],
@@ -52,22 +65,10 @@ const images = [
     path: "new-york-at-night.jpeg",
   },
   {
-    title: "shanghai",
-    price: 265,
-    tags: ["shanghai", "city", "skyline", "water"],
-    path: "SHANGHAI-CHINA.jpg",
-  },
-  {
     title: "singapore skyline",
     price: 250,
     tags: ["shanghai", "city", "skyline", "water"],
     path: "SINGAPORE.jpg",
-  },
-  {
-    title: "vancouver skyline",
-    price: 150,
-    tags: ["water", "city", "water", "skyline"],
-    path: "VANCOUVER-CANADA.jpg",
   },
 ];
 

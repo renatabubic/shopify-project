@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import "./App.css";
 import axios from "axios";
 import ImageTile from "./image.tile";
-import Image from "./Image";
 import MultipleFileInput from "./MultipleFileInput";
 import apiUrl from "./secrets";
 import { ToastContainer, toast } from "react-toastify";
@@ -24,7 +23,7 @@ class Home extends Component {
   }
   handleChange(e) {
     //this.setState() won't update state when e.target.value = tag?!?!
-    if (e.target.type !== "text") this.state.searchBy = e.target.value;
+    if (e.target.type !== "text") this.setState({ searchBy: e.target.value });
     else this.setState({ toSearch: e.target.value });
   }
   handleSubmit() {
@@ -66,8 +65,8 @@ class Home extends Component {
             <button
               onClick={async () => {
                 try {
-                  await axios.delete(apiUrl);
-                  toast.success("images deleted");
+                  const { data } = await axios.delete(apiUrl);
+                  toast.success(data.message);
                   this.getData("");
                 } catch (err) {
                   toast.error("please selected image(s) to delete");

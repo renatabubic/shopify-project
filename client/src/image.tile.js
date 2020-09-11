@@ -45,7 +45,7 @@ class ImageTile extends React.Component {
         {!this.state.selected ? (
           <button
             onClick={async () => {
-              await axios.put(apiUrl + image.id, { selected: true });
+              await axios.put(apiUrl + "/" + image.id, { selected: true });
               this.setState({ selected: true });
             }}
           >

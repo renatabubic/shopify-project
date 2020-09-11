@@ -49,6 +49,14 @@
   display: flex;
   justify-content: center;
 }
+.image-tile {
+  display: flex;
+  justify-content: center;
+  border: 2px black solid;
+  padding: 5px;
+  margin-top: 5px;
+  font-weight: bolder;
+}
 .image-sm-container {
   display: flex;
   flex-direction: column;

@@ -25,6 +25,9 @@ module.exports = (sequelize, Sequelize) => {
         notEmpty: true,
       },
     },
+    blob: {
+      type: Sequelize.BLOB,
+    },
     quantity: {
       type: Sequelize.INTEGER,
       defaultValue: 1,

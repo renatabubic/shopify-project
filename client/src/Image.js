@@ -19,8 +19,8 @@ class Image extends React.Component {
   }
   async getData() {
     const { id } = this.props.match.params;
-    console.log(id);
     const res = await axios.get(apiUrl + "/" + id);
+    console.log(res);
     const image = res.data;
     let images = [];
     let ids = {};
@@ -50,7 +50,6 @@ class Image extends React.Component {
     if (this.state.deleted) {
       return <Redirect to="/images" />;
     }
-    console.log(image.path);
     return (
       <div>
         <div className="image-container">
