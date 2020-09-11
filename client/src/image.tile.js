@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import apiUrl from "./secrets";
+import apiUrl from "./apiUrl";
 import { Link } from "react-router-dom";
 
 class ImageTile extends React.Component {

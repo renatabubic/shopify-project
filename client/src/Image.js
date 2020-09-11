@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import apiUrl from "./secrets";
+import apiUrl from "./apiUrl";
 import { Link, Redirect } from "react-router-dom";
 
 class Image extends React.Component {

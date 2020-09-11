@@ -3,7 +3,7 @@ import "./App.css";
 import axios from "axios";
 import ImageTile from "./image.tile";
 import MultipleFileInput from "./MultipleFileInput";
-import apiUrl from "./secrets";
+import apiUrl from "./apiUrl";
 import { ToastContainer, toast } from "react-toastify";
 
 class Home extends Component {
