@@ -50,6 +50,7 @@ class Image extends React.Component {
     if (this.state.deleted) {
       return <Redirect to="/images" />;
     }
+    console.log(image.path);
     return (
       <div>
         <div className="image-container">
@@ -61,7 +62,7 @@ class Image extends React.Component {
               <p>Title: {image.title}</p>
             </div>
             <img
-              src={process.env.PUBLIC_URL + "/uploads/" + image.urlImage}
+              src={process.env.PUBLIC_URL + "/uploads/" + image.path}
               height={500}
               width={500}
               alt=""
@@ -87,9 +88,7 @@ class Image extends React.Component {
                     onClick={this.waitForIdToChange}
                   >
                     <img
-                      src={
-                        process.env.PUBLIC_URL + "/uploads/" + image.urlImage
-                      }
+                      src={process.env.PUBLIC_URL + "/uploads/" + image.path}
                       height={200}
                       width={200}
                       alt=""

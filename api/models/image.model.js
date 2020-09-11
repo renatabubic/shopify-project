@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.Sequelize.DECIMAL(16, 2),
       defaultValue: 50,
     },
-    urlImage: {
+    path: {
       type: Sequelize.TEXT,
       allowNull: false,
       validate: {

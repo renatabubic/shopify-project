@@ -8,16 +8,15 @@ const { fileURLToPath } = require("url");
 // Create and Save a new Image
 exports.create = async (req, res) => {
   try {
-    const resp = req.body;
-
-    //check if there is multiple images to create
-    if (Array.isArray(resp.title)) {
+    console.log(req.files);
+    //check if there are multiple images to create
+    if (Array.isArray(req.body.title)) {
       let toUpload = [];
-      for (let i = 0; i < resp.title.length; i++) {
+      for (let i = 0; i < req.body.title.length; i++) {
         toUpload[i] = {
-          title: resp.title[i],
-          tags: resp.tags[i].split(","),
-          urlImage: req.files[i].filename,
+          title: req.body.title[i],
+          tags: req.body.tags[i].split(","),
+          path: req.files[i].filename,
         };
       }
       const images = await Image.bulkCreate(toUpload, { returning: true });
@@ -32,7 +31,7 @@ exports.create = async (req, res) => {
       const data = {
         title: req.body.title,
         tags: req.body.tags.split(","),
-        urlImage: req.files[0].filename,
+        path: req.files,
       };
       const image = await Image.create(data);
       if (image) {

@@ -2,7 +2,6 @@ module.exports = (app) => {
   const images = require("../controllers/image.controller");
   const db = require("../models");
   const multer = require("multer");
-  const path = require("path");
 
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
